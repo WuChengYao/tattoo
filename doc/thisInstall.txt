@@ -1,0 +1,48 @@
+AJAX:
+npm install --save axios vue-axios
+"axios": "^0.21.4",
+"vue-axios": "^3.3.6",
+---------------------------------------
+loading畫面:
+**Vue.js 2.x
+npm install --save vue-loading-overlay@^3.0.1
+"vue-loading-overlay": "^3.0.1"
+
+@/axiosLoading/axios 創建axios攔截器
+---------------------------------------
+bootstrap-vue
+
+npm install bootstrap@^4.4.1
+npm install vue bootstrap-vue@^2.21.2
+npm install popper.js //已沒再更新 不能用就要找>>npm install @floating-ui/dom
+npm install portal-vue@^2.1.7
+---------------------------------------
+簽名板
+
+npm install vue-signature-pad@^2.0.4
+
+----------------none-----------------------
+輪播圖swiper
+
+npm install swiper@^3.4.2
+npm install vue-awesome-swiper@^2.6.7
+
+----------------none-----------------------
+時間套件
+
+npm install moment@^2.29.1
+
+----------------none-----------------------
+多國語言vue-i18n
+
+npm install vue-i18n@^8.24.2
+---------------------------------------
+
+
+"@chenfengyuan/vue-barcode": "github:xkeshi/vue-barcode",
+"@syncfusion/ej2-vue-barcode-generator": "^19.2.55",
+"@vue/component-compiler-utils": "^3.1.2",
+"js-cookie": "^2.2.1",
+"vue2-advanced-search": "^0.1.4-4.1",
+"vuejs-datepicker": "^1.6.2",
+"vuex-persistedstate": "^4.0.0-beta.3"
