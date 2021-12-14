@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
     chainWebpack: config => {
         config.module.rules.delete('eslint');
@@ -14,5 +16,7 @@ module.exports = {
             title: '紋繡'
         }
     },
-    publicPath: './'
+    // publicPath: process.env.NODE_ENV === 'production' ? '/' : '/'
+    // publicPath: './'
+    transpileDependencies: [/node_modules[/\\\\](element-ui|vuex|)[/\\\\]/],
 }
