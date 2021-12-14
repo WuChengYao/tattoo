@@ -17,6 +17,6 @@ module.exports = {
         }
     },
     // publicPath: process.env.NODE_ENV === 'production' ? '/' : '/'
-    // publicPath: './'
-    transpileDependencies: [/node_modules[/\\\\](element-ui|vuex|)[/\\\\]/],
+    publicPath: './'
+    // transpileDependencies: [/node_modules[/\\\\](element-ui|vuex|)[/\\\\]/],
 }
