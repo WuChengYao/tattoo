@@ -64,8 +64,8 @@
         <b-row class="mb-2">
             <b-col sm="12">
                 <b-form-group label="現有服用過藥物" v-slot="{ take_medicine }">
-                    <b-form-radio v-model="takeMedicine" :aria-describedby="take_medicine" name="some-radios" value="nDrug">無</b-form-radio>
-                    <b-form-radio v-model="takeMedicine" :aria-describedby="take_medicine" name="some-radios" value="yDrug">有</b-form-radio>
+                    <b-form-radio v-model="takeMedicine" :aria-describedby="take_medicine" name="take_medicine" value="nDrug">無</b-form-radio>
+                    <b-form-radio v-model="takeMedicine" :aria-describedby="take_medicine" name="take_medicine" value="yDrug">有</b-form-radio>
                     <b-form-input v-show="takeMedicine == 'yDrug'" v-model.trim="drugName" placeholder="藥名" type="text"></b-form-input>
                 </b-form-group>
             </b-col>
@@ -73,8 +73,20 @@
         <hr>
         <!-- 曾經有做過項目經驗 -->
         <b-row class="mb-2">
-            <b-col sm="12">
-                曾經有做過項目經驗
+            <b-col sm="7">
+                <b-form-group label="曾經有做過項目經驗" v-slot="{user_experience}">
+                    <b-form-checkbox-group
+                        id="user_experience"
+                        v-model="userExperience"
+                        :options="userExperienceOptions"
+                        :aria-describedby="user_experience"
+                        name="user_experience"
+                    ></b-form-checkbox-group>
+                </b-form-group>
+            </b-col>
+            <b-col sm="5">
+                <label>部位</label>
+                <b-form-input v-model.trim="userExperienceLocation" placeholder="部位敘述" type="text"></b-form-input>
             </b-col>
         </b-row>
         <hr>
@@ -82,8 +94,8 @@
         <b-row class="mb-2">
             <b-col sm="12">
                 <b-form-group label="有無其他臉部、眼睛、唇部疾病或損害等情況需說明" v-slot="{ face_wound }">
-                    <b-form-radio v-model="hasFaceWound" :aria-describedby="face_wound" name="some-radios" value="notHave">無</b-form-radio>
-                    <b-form-radio v-model="hasFaceWound" :aria-describedby="face_wound" name="some-radios" value="have">有</b-form-radio>
+                    <b-form-radio v-model="hasFaceWound" :aria-describedby="face_wound" name="face_wound" value="notHave">無</b-form-radio>
+                    <b-form-radio v-model="hasFaceWound" :aria-describedby="face_wound" name="face_wound" value="have">有</b-form-radio>
                     <b-form-input v-show="hasFaceWound == 'have'" v-model.trim="faceWoundName" placeholder="請描述..." type="text"></b-form-input>
                 </b-form-group>
             </b-col>
@@ -91,8 +103,26 @@
         <hr>
         <!-- 如何得知本店 -->
         <b-row class="mb-2">
-            <b-col sm="12">
-                如何得知本店
+            <b-col sm="7">
+                <b-form-group label="如何得知本店" v-slot="{get_message}">
+                    <b-form-checkbox-group
+                        id="get_message"
+                        v-model="getMessage"
+                        :options="getMessageOptions"
+                        :aria-describedby="get_message"
+                        name="get_message"
+                    ></b-form-checkbox-group>
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <b-row class="mb-2" align-h="center">
+            <b-col cols="auto">
+                <b-button variant="primary" @click="send">確認新增</b-button>
+            </b-col>
+            <b-col cols="auto">
+                <router-link class="btn btn-secondary" :to="{name: 'Index'}">
+                    取消
+                 </router-link>
             </b-col>
         </b-row>
     </b-container>
@@ -109,7 +139,7 @@ export default {
             userName: '',
             userPhone: '',
             userLine: '',
-            userBirthday: '2021/01/01',
+            userBirthday: '2021-01-01',
             //膚質狀況
             skinCondition: [], // Must be an array reference!
             skinConditionOptions: [
@@ -134,17 +164,41 @@ export default {
             ],
             userFettleNarrate: '',
             //曾有服用過藥物
-            takeMedicine: '',
+            takeMedicine: 'nDrug',
             drugName: '',
             //曾經有做過項目經驗
+            userExperience: [],
+            userExperienceOptions: [
+                { text: '嫁接睫毛', value: 'eyelashExtension' },
+                { text: '紋繡眉', value: 'tattooEyebrow' },
+                { text: '紋唇', value: 'lipTattoo' },
+                { text: '紋眼線', value: 'eyeliner' },
+                { text: '雷射', value: 'laser' },
+                { text: '彩妝造型', value: 'makeupStyling' },
+                { text: '做臉', value: 'faceCare' },
+                { text: '從來沒有', value: 'noHave' }
+            ],
+            userExperienceLocation: '',
             //臉部疾病
-            hasFaceWound: '',
+            hasFaceWound: 'notHave',
             faceWoundName: '',
             //如何得知本店
+            getMessage: [],
+            getMessageOptions: [
+                { text: '網路', value: 'network' },
+                { text: '廣告單張', value: 'advertisingFlyer' },
+                { text: '親友介紹', value: 'friendIntroduced' },
+                { text: '經過', value: 'goThrough' }
+            ],
         }
     },
     beforeMount () {},
-    methods: {},
+    methods: {
+        send () {
+            console.log('送出');
+            alert('還沒好');
+        }
+    },
     watch: {}
 }
 </script>
