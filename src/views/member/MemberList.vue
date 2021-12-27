@@ -104,6 +104,14 @@ export default {
                 }
             });
         })
+        //test
+        //  this.$axios.get('')
+        // .then(response => {
+        //     console.log(response);
+        // })
+        // .catch(error => {
+        //     console.log(error);
+        // })
     },
     methods: {},
     watch: {},

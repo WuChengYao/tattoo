@@ -8,6 +8,7 @@ axios.interceptors.request.use(
     return confing;
   },
   (error) => {
+    store.commit('Set_Loading', false);
     return Promise.reject(error);
   }
 );
@@ -15,10 +16,11 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => {
     // console.log('攔截回應');
-    store.commit('Set_Loading', false)
+    store.commit('Set_Loading', false);
     return response;
   },
   (error) => {
+    store.commit('Set_Loading', false);
     return Promise.reject(error);
   }
 );
