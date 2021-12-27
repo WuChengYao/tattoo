@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require("webpack");
 
 module.exports = {
     chainWebpack: config => {
@@ -7,6 +8,16 @@ module.exports = {
           'vue$',
           path.resolve(__dirname, 'node_modules/vue/dist/vue.runtime.esm.js')
         )
+    },
+    configureWebpack: {
+        //支持jquery
+        plugins: [
+            new webpack.ProvidePlugin({
+                $:"jquery",
+                jQuery:"jquery",
+                "windows.jQuery":"jquery"
+            })
+        ]
     },
     pages: {
         index: {

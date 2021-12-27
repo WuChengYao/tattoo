@@ -1,132 +1,132 @@
 <template>
-  <div class="MemberCreate">
-    <b-container>
-        <h2>新增會員</h2>
-        <!-- 基本資料 -->
-        <b-row class="mb-2">
-            <b-col sm="3">
-                <label>姓名</label>
-                <b-form-input v-model.trim="userName" placeholder="姓名" type="text"></b-form-input>
-            </b-col>
-            <b-col sm="3">
-                <label>電話</label>
-                <b-form-input v-model.trim="userPhone" placeholder="電話" type="number"></b-form-input>
-            </b-col>
-            <b-col sm="3">
-                <label>LINE</label>
-                <b-form-input v-model.trim="userLine" placeholder="LINE" type="text"></b-form-input>
-            </b-col>
-            <b-col sm="3">
-                <label>生日</label>
-                <b-form-input v-model.trim="userBirthday" placeholder="生日" type="date"></b-form-input>
-            </b-col>
-        </b-row>
-        <hr>
-        <!-- 膚質狀況 -->
-        <b-row class="mb-2">
-            <b-col sm="7">
-                <b-form-group label="膚質狀況" v-slot="{skin_condition}">
-                    <b-form-checkbox-group
-                        id="skin_condition"
-                        v-model="skinCondition"
-                        :options="skinConditionOptions"
-                        :aria-describedby="skin_condition"
-                        name="skin_condition"
-                    ></b-form-checkbox-group>
-                </b-form-group>
-            </b-col>
-            <b-col sm="5">
-                <label>情況敘述</label>
-                <b-form-input v-model.trim="skinConditionNarrate" placeholder="情況敘述" type="text"></b-form-input>
-            </b-col>
-        </b-row>
-        <hr>
-        <!-- 身體狀況 -->
-        <b-row class="mb-2">
-            <b-col sm="7">
-                <b-form-group label="身體狀況" v-slot="{user_fettle}">
-                    <b-form-checkbox-group
-                        id="user_fettle"
-                        v-model="userFettle"
-                        :options="userFettleOptions"
-                        :aria-describedby="user_fettle"
-                        name="user_fettle"
-                    ></b-form-checkbox-group>
-                </b-form-group>
-            </b-col>
-            <b-col sm="5">
-                <label>其他</label>
-                <b-form-input v-model.trim="userFettleNarrate" placeholder="其他敘述" type="text"></b-form-input>
-            </b-col>
-        </b-row>
-        <hr>
-        <!-- 現有服用過藥物 -->
-        <b-row class="mb-2">
-            <b-col sm="12">
-                <b-form-group label="現有服用過藥物" v-slot="{ take_medicine }">
-                    <b-form-radio v-model="takeMedicine" :aria-describedby="take_medicine" name="take_medicine" value="nDrug">無</b-form-radio>
-                    <b-form-radio v-model="takeMedicine" :aria-describedby="take_medicine" name="take_medicine" value="yDrug">有</b-form-radio>
-                    <b-form-input v-show="takeMedicine == 'yDrug'" v-model.trim="drugName" placeholder="藥名" type="text"></b-form-input>
-                </b-form-group>
-            </b-col>
-        </b-row>
-        <hr>
-        <!-- 曾經有做過項目經驗 -->
-        <b-row class="mb-2">
-            <b-col sm="7">
-                <b-form-group label="曾經有做過項目經驗" v-slot="{user_experience}">
-                    <b-form-checkbox-group
-                        id="user_experience"
-                        v-model="userExperience"
-                        :options="userExperienceOptions"
-                        :aria-describedby="user_experience"
-                        name="user_experience"
-                    ></b-form-checkbox-group>
-                </b-form-group>
-            </b-col>
-            <b-col sm="5">
-                <label>部位</label>
-                <b-form-input v-model.trim="userExperienceLocation" placeholder="部位敘述" type="text"></b-form-input>
-            </b-col>
-        </b-row>
-        <hr>
-        <!-- 臉部疾病 -->
-        <b-row class="mb-2">
-            <b-col sm="12">
-                <b-form-group label="有無其他臉部、眼睛、唇部疾病或損害等情況需說明" v-slot="{ face_wound }">
-                    <b-form-radio v-model="hasFaceWound" :aria-describedby="face_wound" name="face_wound" value="notHave">無</b-form-radio>
-                    <b-form-radio v-model="hasFaceWound" :aria-describedby="face_wound" name="face_wound" value="have">有</b-form-radio>
-                    <b-form-input v-show="hasFaceWound == 'have'" v-model.trim="faceWoundName" placeholder="請描述..." type="text"></b-form-input>
-                </b-form-group>
-            </b-col>
-        </b-row>
-        <hr>
-        <!-- 如何得知本店 -->
-        <b-row class="mb-2">
-            <b-col sm="7">
-                <b-form-group label="如何得知本店" v-slot="{get_message}">
-                    <b-form-checkbox-group
-                        id="get_message"
-                        v-model="getMessage"
-                        :options="getMessageOptions"
-                        :aria-describedby="get_message"
-                        name="get_message"
-                    ></b-form-checkbox-group>
-                </b-form-group>
-            </b-col>
-        </b-row>
-        <b-row class="mb-2" align-h="center">
-            <b-col cols="auto">
-                <b-button variant="primary" @click="send">確認新增</b-button>
-            </b-col>
-            <b-col cols="auto">
-                <router-link class="btn btn-secondary" :to="{name: 'Index'}">
-                    取消
-                 </router-link>
-            </b-col>
-        </b-row>
-    </b-container>
-  </div>
+    <div class="MemberCreate">
+        <b-container>
+            <h2 style="text-align: center;">新增會員</h2>
+            <!-- 基本資料 -->
+            <b-row class="mb-2">
+                <b-col sm="3">
+                    <label>姓名</label>
+                    <b-form-input v-model.trim="userName" placeholder="姓名" type="text"></b-form-input>
+                </b-col>
+                <b-col sm="3">
+                    <label>電話</label>
+                    <b-form-input v-model.trim="userPhone" placeholder="電話" type="number"></b-form-input>
+                </b-col>
+                <b-col sm="3">
+                    <label>LINE</label>
+                    <b-form-input v-model.trim="userLine" placeholder="LINE" type="text"></b-form-input>
+                </b-col>
+                <b-col sm="3">
+                    <label>生日</label>
+                    <b-form-input v-model.trim="userBirthday" placeholder="生日" type="date"></b-form-input>
+                </b-col>
+            </b-row>
+            <hr>
+            <!-- 膚質狀況 -->
+            <b-row class="mb-2">
+                <b-col sm="7">
+                    <b-form-group label="膚質狀況" v-slot="{skin_condition}">
+                        <b-form-checkbox-group
+                            id="skin_condition"
+                            v-model="skinCondition"
+                            :options="skinConditionOptions"
+                            :aria-describedby="skin_condition"
+                            name="skin_condition"
+                        ></b-form-checkbox-group>
+                    </b-form-group>
+                </b-col>
+                <b-col sm="5">
+                    <label>情況敘述</label>
+                    <b-form-input v-model.trim="skinConditionNarrate" placeholder="情況敘述" type="text"></b-form-input>
+                </b-col>
+            </b-row>
+            <hr>
+            <!-- 身體狀況 -->
+            <b-row class="mb-2">
+                <b-col sm="7">
+                    <b-form-group label="身體狀況" v-slot="{user_fettle}">
+                        <b-form-checkbox-group
+                            id="user_fettle"
+                            v-model="userFettle"
+                            :options="userFettleOptions"
+                            :aria-describedby="user_fettle"
+                            name="user_fettle"
+                        ></b-form-checkbox-group>
+                    </b-form-group>
+                </b-col>
+                <b-col sm="5">
+                    <label>其他</label>
+                    <b-form-input v-model.trim="userFettleNarrate" placeholder="其他敘述" type="text"></b-form-input>
+                </b-col>
+            </b-row>
+            <hr>
+            <!-- 現有服用過藥物 -->
+            <b-row class="mb-2">
+                <b-col sm="12">
+                    <b-form-group label="現有服用過藥物" v-slot="{ take_medicine }">
+                        <b-form-radio v-model="takeMedicine" :aria-describedby="take_medicine" name="take_medicine" value="nDrug">無</b-form-radio>
+                        <b-form-radio v-model="takeMedicine" :aria-describedby="take_medicine" name="take_medicine" value="yDrug">有</b-form-radio>
+                        <b-form-input v-show="takeMedicine == 'yDrug'" v-model.trim="drugName" placeholder="藥名" type="text"></b-form-input>
+                    </b-form-group>
+                </b-col>
+            </b-row>
+            <hr>
+            <!-- 曾經有做過項目經驗 -->
+            <b-row class="mb-2">
+                <b-col sm="7">
+                    <b-form-group label="曾經有做過項目經驗" v-slot="{user_experience}">
+                        <b-form-checkbox-group
+                            id="user_experience"
+                            v-model="userExperience"
+                            :options="userExperienceOptions"
+                            :aria-describedby="user_experience"
+                            name="user_experience"
+                        ></b-form-checkbox-group>
+                    </b-form-group>
+                </b-col>
+                <b-col sm="5">
+                    <label>部位</label>
+                    <b-form-input v-model.trim="userExperienceLocation" placeholder="部位敘述" type="text"></b-form-input>
+                </b-col>
+            </b-row>
+            <hr>
+            <!-- 臉部疾病 -->
+            <b-row class="mb-2">
+                <b-col sm="12">
+                    <b-form-group label="有無其他臉部、眼睛、唇部疾病或損害等情況需說明" v-slot="{ face_wound }">
+                        <b-form-radio v-model="hasFaceWound" :aria-describedby="face_wound" name="face_wound" value="notHave">無</b-form-radio>
+                        <b-form-radio v-model="hasFaceWound" :aria-describedby="face_wound" name="face_wound" value="have">有</b-form-radio>
+                        <b-form-input v-show="hasFaceWound == 'have'" v-model.trim="faceWoundName" placeholder="請描述..." type="text"></b-form-input>
+                    </b-form-group>
+                </b-col>
+            </b-row>
+            <hr>
+            <!-- 如何得知本店 -->
+            <b-row class="mb-2">
+                <b-col sm="7">
+                    <b-form-group label="如何得知本店" v-slot="{get_message}">
+                        <b-form-checkbox-group
+                            id="get_message"
+                            v-model="getMessage"
+                            :options="getMessageOptions"
+                            :aria-describedby="get_message"
+                            name="get_message"
+                        ></b-form-checkbox-group>
+                    </b-form-group>
+                </b-col>
+            </b-row>
+            <b-row class="mb-2" align-h="center">
+                <b-col cols="auto">
+                    <b-button variant="primary" @click="send">確認新增</b-button>
+                </b-col>
+                <b-col cols="auto">
+                    <router-link class="btn btn-secondary" :to="{name: 'MemberList'}">
+                        取消
+                    </router-link>
+                </b-col>
+            </b-row>
+        </b-container>
+    </div>
 </template>
 
 <script>
@@ -192,11 +192,43 @@ export default {
             ],
         }
     },
-    beforeMount () {},
+    beforeMount () {
+    },
     methods: {
         send () {
             console.log('送出');
-            alert('還沒好');
+            const getDatas = JSON.parse(localStorage.getItem('user_lists'));
+            const getlocalItem = [];
+            if (getDatas != null) {
+                getDatas.forEach(getData => {
+                    getlocalItem.push(getData);
+                });
+            }
+            const pushData = {
+                id:getlocalItem.length+1,
+                userName: this.userName,
+                userPhone: this.userPhone,
+                userLine: this.userLine,
+                userBirthday: this.userBirthday,
+                skinCondition: this.skinCondition,
+                skinConditionNarrate: this.skinConditionNarrate,
+                userFettle: this.userFettle,
+                userFettleNarrate: this.userFettleNarrate,
+                takeMedicine: this.takeMedicine,
+                drugName: this.drugName,
+                userExperience: this.userExperience,
+                userExperienceLocation: this.userExperienceLocation,
+                hasFaceWound: this.hasFaceWound,
+                faceWoundName: this.faceWoundName,
+                getMessage: this.getMessage
+            }
+            getlocalItem.push(pushData);
+            const dataJsonString = JSON.stringify(getlocalItem);
+            localStorage.setItem('user_lists', dataJsonString);
+            
+            alert('目前只是測試用，使用完請至首頁按下清除測試按鈕');
+            alert('新增成功');
+            this.$router.push({ name: 'MemberList'});
         }
     },
     watch: {}
