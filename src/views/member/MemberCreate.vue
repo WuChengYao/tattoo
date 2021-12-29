@@ -273,7 +273,6 @@ export default {
             canvas_title: '', //賦予modal名字
             push_title: '', //傳遞title
             recipient_sign: '',
-            administrator_sign: '',
         }
     },
     beforeMount () {
@@ -334,10 +333,7 @@ export default {
         //簽名打開
         signatureOpen (name) {
             if (name == 'sign_recipient') {
-                this.canvas_title = '收件者簽名';
-                this.push_title = name;
-            } else if (name == 'sign_administrator') {
-                this.canvas_title = '管理員簽名';
+                this.canvas_title = '貴賓簽名';
                 this.push_title = name;
             }
             this.$refs['canvas_view_modal'].show();
@@ -352,8 +348,6 @@ export default {
             console.log(isEmpty);
             if (get_title == 'sign_recipient') {
                 this.recipient_sign = data;
-            } else if (get_title == 'sign_administrator') {
-                this.administrator_sign = data;
             }
             this.$refs['canvas_view_modal'].hide();
             this.isShow = false;
@@ -405,7 +399,8 @@ export default {
                 hasFaceWound: this.hasFaceWound,
                 faceWoundName: this.faceWoundName,
                 getMessage: this.getMessage,
-                userImg: this.img_previews
+                userImg: this.img_previews,
+                recipientSign: this.recipient_sign,
             }
             getlocalItem.push(pushData);
             const dataJsonString = JSON.stringify(getlocalItem);
@@ -496,11 +491,11 @@ export default {
         background-origin: border-box;
         background-clip: content-box, border-box;
     }
-    .MailManageVerifyIssue #canvas_99 .container {
+    .MemberCreate #canvas_99 .container {
         width: "100%";
         padding: 8px 16px;
     }
-    .MailManageVerifyIssue .show_this_img {
+    .MemberCreate .show_this_img {
         width: 300px;
     }
     /* canvas mode */
@@ -520,7 +515,7 @@ export default {
         width: 20px;
     }
     /* ---- */
-    .MailManageVerifyIssue .sign_content .sign_box{
+    .MemberCreate .sign_content .sign_box{
         width: 400px;
         height: 300px;
         border-radius: 10px;
@@ -529,29 +524,29 @@ export default {
         cursor: pointer;
     }
     @media (max-width:1400px) {
-        .MailManageVerifyIssue .sign_content .sign_box{
+        .MemberCreate .sign_content .sign_box{
             width: 350px;
             height: 300px;
         }
     }
     @media (max-width:1200px) {
-        .MailManageVerifyIssue .sign_content .sign_box{
+        .MemberCreate .sign_content .sign_box{
             width: 300px;
             height: 300px;
         }
     }
     @media (max-width:996px) {
-        .MailManageVerifyIssue .sign_content .sign_recipient,
-        .MailManageVerifyIssue .sign_content .sign_administrator {
+        .MemberCreate .sign_content .sign_recipient,
+        .MemberCreate .sign_content .sign_administrator {
             margin-bottom: 10px;
         }
-        .MailManageVerifyIssue .sign_content .sign_box{
+        .MemberCreate .sign_content .sign_box{
             width: 400px;
             height: 250px;
         }
     }
     @media (max-width:490px) {
-        .MailManageVerifyIssue .sign_content .sign_box{
+        .MemberCreate .sign_content .sign_box{
             width: 100%;
             height: 250px;
         }
