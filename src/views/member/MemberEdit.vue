@@ -25,7 +25,7 @@
             <b-row align-h="center" align-v="center" class="mt-5 mb-3">
                 <b-col cols="auto">
                     <p>
-                        上傳美美照片
+                        上傳貴賓照片
                     </p>
                 </b-col>
                 <b-row class="img_content">
@@ -135,6 +135,16 @@
                     </b-form-group>
                 </b-col>
             </b-row>
+            <b-row align-h="around" align-v="center" class="m-5 sign_content">
+                <b-col xl="4" lg="4" md="12" class="sign_recipient">
+                    <h5>
+                        貴賓簽名
+                    </h5>
+                    <div class="sign_box">
+                        <img style="width:100%; height:100%" :src="recipient_sign" alt="貴賓簽名">
+                    </div>
+                </b-col>
+            </b-row>
             <b-row class="mb-2" align-h="center">
                 <b-col cols="auto">
                     <b-button variant="primary" @click="send">
@@ -212,12 +222,13 @@ export default {
                 { text: '親友介紹', value: 'friendIntroduced' },
                 { text: '經過', value: 'goThrough' }
             ],
-            
+
             //照片
             no_img: require('@/assets/images/upload.png'),
             img_previews_length: 1,
             img_previews: [],
-            none_upimg: 1
+            none_upimg: 1,
+            recipient_sign: '',
         }
     },
     beforeMount () {
@@ -246,9 +257,10 @@ export default {
         this.faceWoundName = thisData.faceWoundName;
         this.getMessage = thisData.getMessage;
         this.img_previews = thisData.userImg;
+        this.recipient_sign = thisData.recipientSign;
     },
     methods: {
-        //照片    
+        //照片
         imgUpData: function (event) {
             let input = event.target;
             let count = input.files.length;
@@ -285,7 +297,7 @@ export default {
                         }
                     }
                     break;
-            
+
                 default:
                     alert('格式錯誤');
                     break;
@@ -349,7 +361,7 @@ export default {
 </script>
 
 <style>
-    
+
     /* 照片 */
     .img_content {
     width: 100%;
@@ -362,7 +374,7 @@ export default {
         cursor: pointer;
     }
     .img_content .show_img {
-        position: relative; 
+        position: relative;
     }
     .img_content .show_img .show_this_img{
         width: 150px;
@@ -392,6 +404,44 @@ export default {
         }
         .show_img img{
             width: 100%;
+        }
+    }
+
+    /* ---- */
+    .MemberEdit .sign_content .sign_box{
+        width: 400px;
+        height: 300px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 1px 0px 5px #666;
+        cursor: pointer;
+    }
+    @media (max-width:1400px) {
+        .MemberEdit .sign_content .sign_box{
+            width: 350px;
+            height: 300px;
+        }
+    }
+    @media (max-width:1200px) {
+        .MemberEdit .sign_content .sign_box{
+            width: 300px;
+            height: 300px;
+        }
+    }
+    @media (max-width:996px) {
+        .MemberEdit .sign_content .sign_recipient,
+        .MemberEdit .sign_content .sign_administrator {
+            margin-bottom: 10px;
+        }
+        .MemberEdit .sign_content .sign_box{
+            width: 400px;
+            height: 250px;
+        }
+    }
+    @media (max-width:490px) {
+        .MemberEdit .sign_content .sign_box{
+            width: 100%;
+            height: 250px;
         }
     }
 </style>

@@ -25,7 +25,7 @@
             <b-row align-h="center" align-v="center" class="mt-5 mb-3">
                 <b-col cols="auto">
                     <p>
-                        上傳美美照片
+                        上傳貴賓照片
                     </p>
                 </b-col>
                 <b-row class="img_content">
@@ -162,7 +162,7 @@
                         <VueSignaturePad
                         id="signature"
                         width="100%"
-                        height="500px"
+                        height="80vh"
                         ref="signaturePad"
                         :options="options"
                         v-show="isShow"
@@ -254,7 +254,7 @@ export default {
                 { text: '廣告單張', value: 'advertisingFlyer' },
                 { text: '親友介紹', value: 'friendIntroduced' },
                 { text: '經過', value: 'goThrough' }
-            ],            
+            ],
             //照片
             no_img: require('@/assets/images/upload.png'),
             img_previews_length: 1,
@@ -278,7 +278,7 @@ export default {
     beforeMount () {
     },
     methods: {
-        //照片    
+        //照片
         imgUpData: function (event) {
             let input = event.target;
             let count = input.files.length;
@@ -315,7 +315,7 @@ export default {
                         }
                     }
                     break;
-            
+
                 default:
                     alert('格式錯誤');
                     break;
@@ -405,7 +405,7 @@ export default {
             getlocalItem.push(pushData);
             const dataJsonString = JSON.stringify(getlocalItem);
             localStorage.setItem('user_lists', dataJsonString);
-            
+
             alert('目前只是測試用，使用完請至首頁按下清除測試按鈕');
             alert('新增成功');
             this.$router.push({ name: 'MemberList'});
@@ -446,7 +446,7 @@ export default {
         cursor: pointer;
     }
     .img_content .show_img {
-        position: relative; 
+        position: relative;
     }
     .img_content .show_img .show_this_img{
         width: 150px;
@@ -482,6 +482,15 @@ export default {
     /* 畫冊 */
     #canvas_99 .modal-dialog{
         max-width: 90%;
+    }
+    @media (max-width:996px) {
+        #canvas_99 .modal-dialog{
+            max-width: 100%;
+        }
+        #canvas_99 .modal-dialog .modal-body .container{
+            padding: 0px;
+            max-width: 98%;
+        }
     }
     #signature {
         border: double 3px transparent;
