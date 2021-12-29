@@ -21,6 +21,26 @@
                     <b-form-input v-model.trim="userBirthday" placeholder="生日" type="date"></b-form-input>
                 </b-col>
             </b-row>
+            <!-- 圖片上傳 -->
+            <b-row align-h="center" align-v="center" class="mt-5 mb-3">
+                <b-col cols="auto">
+                    <p>
+                        上傳美美照片
+                    </p>
+                </b-col>
+                <b-row class="img_content">
+                    <b-col cols="auto" class="show_img mb-1" style="margin-right: 10px" v-for="item, idx in img_previews" :key="idx">
+                        <button @click="del_img(idx)" class="img_x">X</button>
+                        <img class="show_this_img" :src="item">
+                    </b-col>
+                    <b-col cols="auto" class="mb-1" v-show="none_upimg == 1">
+                        <label for="upload" class="btn-upload">
+                            <img :src="no_img">
+                            <input hidden id="upload" multiple="multiple" type="file" accept="image/jpeg,image/jpg,image/png" @change="imgUpData">
+                        </label>
+                    </b-col>
+                </b-row>
+            </b-row>
             <hr>
             <!-- 膚質狀況 -->
             <b-row class="mb-2">
@@ -192,6 +212,12 @@ export default {
                 { text: '親友介紹', value: 'friendIntroduced' },
                 { text: '經過', value: 'goThrough' }
             ],
+            
+            //照片
+            no_img: require('@/assets/images/upload.png'),
+            img_previews_length: 1,
+            img_previews: [],
+            none_upimg: 1
         }
     },
     beforeMount () {
@@ -219,8 +245,61 @@ export default {
         this.hasFaceWound = thisData.hasFaceWound;
         this.faceWoundName = thisData.faceWoundName;
         this.getMessage = thisData.getMessage;
+        this.img_previews = thisData.userImg;
     },
     methods: {
+        //照片    
+        imgUpData: function (event) {
+            let input = event.target;
+            let count = input.files.length;
+            let img_type = input.files.item(0).type;    //副檔名
+            let img_size = Math.ceil((input.files.item(0).size / 1024) / 1024); //計算檔案大小
+            let index = 0;
+            switch (img_type) {
+                case "image/jpeg":
+                case "image/jpg":
+                case "image/png":
+                    if (img_size > 10) {
+                        alert('檔案過大');
+                    }
+                    else {
+                        if (input.files) {
+                            if (count > this.img_previews_length) {
+                                alert('檔案數量過多');
+                                return;
+                            } else {
+                                if ((this.img_previews.length + count) >= (this.img_previews_length + 1)) {
+                                    alert('檔案數量過多');
+                                    return;
+                                } else {
+                                    while(count --) {
+                                        let reader = new FileReader();
+                                        reader.onload = (e) => {
+                                            this.img_previews.push(e.target.result);
+                                        }
+                                        reader.readAsDataURL(input.files[index]);
+                                        index ++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+            
+                default:
+                    alert('格式錯誤');
+                    break;
+            }
+        },
+        del_img: function(idx) {
+            let yes_del = confirm('確定刪除此照片');
+            if (yes_del) {
+                this.img_previews.splice(idx, 1);
+                if (this.img_previews.length <= this.img_previews_length) {
+                    this.none_upimg = 1;
+                }
+            }
+        },
         send () {
             console.log('更新');
             const getDatas = JSON.parse(localStorage.getItem('user_lists'));
@@ -240,7 +319,8 @@ export default {
                 userExperienceLocation: this.userExperienceLocation,
                 hasFaceWound: this.hasFaceWound,
                 faceWoundName: this.faceWoundName,
-                getMessage: this.getMessage
+                getMessage: this.getMessage,
+                userImg: this.img_previews
             }
             var newData = [];
             getDatas.forEach(getData => {
@@ -257,10 +337,61 @@ export default {
             localStorage.setItem('user_lists', dataJsonString);
         }
     },
-    watch: {}
-}
+    watch: {
+        img_previews () {
+            if (this.img_previews.length >= this.img_previews_length) {
+                this.none_upimg = 0;
+            } else if (this.img_previews.length <= this.img_previews_length) {
+                this.none_upimg = 1;
+            }
+        }}
+    }
 </script>
 
 <style>
-
+    
+    /* 照片 */
+    .img_content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    .img_content img{
+        width: 60px;
+        cursor: pointer;
+    }
+    .img_content .show_img {
+        position: relative; 
+    }
+    .img_content .show_img .show_this_img{
+        width: 150px;
+    }
+    .img_content .show_img .img_x{
+        font-size: 25px;
+        font-weight: bold;
+        color: #666;
+        position: absolute;
+        top: 0;
+        right: 12px;
+        border-radius: 50%;
+        padding: 0px 10px;
+        cursor: pointer;
+    }
+    .show_img {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .show_img img{
+        width: 200px;
+    }
+    @media screen and (max-width: 480px) {
+        .show_img {
+            justify-content: center;
+        }
+        .show_img img{
+            width: 100%;
+        }
+    }
 </style>
